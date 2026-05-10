@@ -1,0 +1,114 @@
+# GitHub Actions workflow — auto-prepends each new release to RELEASES.md
+# in the same repo. Drop this file in the target repo at:
+#   .github/workflows/update-releases-md.yml
+#
+# Trigger: when a release is published (gh release create, or via the
+# GitHub UI). Manual published-release edits also re-fire and the
+# workflow is idempotent — it grep-checks for the existing entry and
+# skips if already present.
+#
+# Required permissions: GITHUB_TOKEN with contents:write (default in
+# the modern Actions permission model). No PAT needed.
+
+name: update-releases-md
+
+on:
+  release:
+    types: [published, edited]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Build release entry + prepend to RELEASES.md
+        env:
+          REL_TAG:    ${{ github.event.release.tag_name }}
+          REL_NAME:   ${{ github.event.release.name }}
+          REL_BODY:   ${{ github.event.release.body }}
+          REL_DATE:   ${{ github.event.release.published_at }}
+          REL_URL:    ${{ github.event.release.html_url }}
+          REL_ASSETS: ${{ toJSON(github.event.release.assets) }}
+        run: |
+          set -eu
+          python3 << 'PY'
+          import json, os, pathlib, re, sys
+
+          tag    = os.environ["REL_TAG"]
+          name   = os.environ["REL_NAME"] or tag
+          body   = os.environ.get("REL_BODY", "") or "_(no notes)_"
+          date   = os.environ["REL_DATE"][:10]   # YYYY-MM-DD
+          url    = os.environ["REL_URL"]
+          assets = json.loads(os.environ["REL_ASSETS"])
+
+          # Build markdown for assets — name, size in MB, download URL.
+          asset_lines = []
+          for a in assets:
+              size_mb = a.get("size", 0) / (1024 * 1024)
+              asset_lines.append(
+                  f"  - [{a['name']}]({a['browser_download_url']}) "
+                  f"({size_mb:.1f} MB)")
+          asset_block = ("\n**Downloads:**\n" + "\n".join(asset_lines)
+                         if asset_lines else "")
+
+          # Heading anchors on tag so each release has a stable URL
+          # (#vX-Y-Z form, github auto-anchors the heading).
+          entry = (
+              f"## {name} — {date}\n\n"
+              f"_Tag: [`{tag}`]({url})_\n\n"
+              f"{body.rstrip()}\n"
+              f"{asset_block}\n\n"
+              "---\n\n"
+          )
+
+          path = pathlib.Path("RELEASES.md")
+          existing = path.read_text(encoding="utf-8") if path.exists() else ""
+
+          # Idempotency: don't re-prepend if this tag is already on the
+          # page. (Edited releases re-fire the workflow.)
+          marker = f"_Tag: [`{tag}`]"
+          if marker in existing:
+              # Replace the existing entry block (heading-to-heading).
+              # Pattern: from "## ... — date" line that owns this tag,
+              # through the next "## " or end of file.
+              pat = re.compile(
+                  r"## [^\n]*\n\n_Tag: \[`" + re.escape(tag) + r"`\][^\n]*\n.*?(?=\n## |\Z)",
+                  re.DOTALL)
+              new = pat.sub(entry.rstrip() + "\n", existing, count=1)
+              if new != existing:
+                  path.write_text(new, encoding="utf-8")
+                  print(f"Replaced existing entry for {tag}")
+              else:
+                  print(f"Tag {tag} present but pattern didn't match; appending.")
+                  path.write_text(entry + existing, encoding="utf-8")
+          else:
+              # New release — prepend (most-recent at top).
+              header = "# Releases\n\n"
+              if existing.startswith(header):
+                  body_existing = existing[len(header):]
+              else:
+                  body_existing = existing
+              path.write_text(header + entry + body_existing, encoding="utf-8")
+              print(f"Prepended {tag}")
+          PY
+
+      - name: Commit + push if changed
+        run: |
+          set -eu
+          if git diff --quiet; then
+              echo "RELEASES.md unchanged."
+              exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add RELEASES.md
+          git commit -m "docs: update RELEASES.md for ${{ github.event.release.tag_name }}"
+          git push
