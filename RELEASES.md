@@ -1,5 +1,64 @@
 # Releases
 
+## v0.2.41 — 2026-05-13
+
+_Tag: [`v0.2.41`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.41)_
+
+## v0.2.41 — auto-upload diagnostics default on + cross-peer match grouping
+
+### Auto-upload is now always-on
+
+The dev-section toggle and Settings → Diagnostics tab are gone. Every
+v0.2.41 build automatically uploads crash and desync reports to
+`hub.2dfm.org/logs` so we can investigate user-side bugs without
+having to ask each player for logs. The uploaded data is the same as
+in v0.2.40: partially-redacted hook logs (IPs masked, no game footage,
+no inputs), tagged with `session_id` / `match_id` / `client_version` /
+`game_id` / `hook_dll_sha1`.
+
+### Multi-dir scan
+
+Previously the launcher only checked the *currently-selected* game's
+`upload_queue/`. If a user crashed mid-match then opened the launcher
+without re-selecting their game, the orphan report sat on disk forever.
+The launcher now round-robins through every installed game's queue, one
+manifest per tick, so reports always get sent regardless of what panel
+the user is looking at.
+
+### Server-side analytics for cross-peer desync analysis
+
+When both peers crash on the same desync, they upload separately with
+different `session_id`s but the same `match_id`. The hub now indexes
+match_id and exposes:
+
+- `GET /summary` — counts by kind/version/game + a top-10 list of
+  matches where both peers uploaded (the high-signal desync diffs)
+- `GET /by_match/<match_id>` — pull both peers' bundles for one match
+- `GET /by_version/<v>` — every upload from one client build, for
+  regression hunting after a release
+- `GET /recent` now accepts `kind` / `version` / `game_id` /
+  `match_id` / `since` filters
+
+### Dev tool additions
+
+`tools/fm2k_logs.py`:
+- `summary` — first thing to run; shows what's worth investigating
+- `pull-match <id>` — bulk-fetch both peers for one match
+- `show-match <id>` — print both peers' meta + log tails interleaved,
+  P1 first then P2, for direct inline LLM analysis
+- `recent --version X --game Y --match Z` — server-side filtering
+
+### What's not changed since v0.2.40
+
+Spectator code path still on `FULL_SESSION` default. Next release will
+wire `/F` boot-to-battle into the spectator launch path so mid-battle
+joiners skip the visible title/CSS replay.
+
+**Downloads:**
+  - [fm2k_v0.2.41.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.41/fm2k_v0.2.41.zip) (9.2 MB)
+
+---
+
 ## v0.2.40 — 2026-05-13
 
 _Tag: [`v0.2.40`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.40)_
