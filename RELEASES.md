@@ -1,5 +1,86 @@
 # Releases
 
+## v0.2.40 — 2026-05-13
+
+_Tag: [`v0.2.40`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.40)_
+
+## v0.2.40 — auto-upload diagnostics + boot-to-battle + immediate desync termination
+
+### New features
+
+**Crash & desync auto-upload.** When the game crashes or GekkoNet detects
+state divergence, the hook drops a manifest and the launcher posts the
+diagnostic bundle (debug log tail, desync diff, RNG trace) to
+`hub.2dfm.org/logs`. Off by default — opt in via the new dev-section
+checkbox **"Auto-upload crash/desync diagnostics"**. Bundles are tagged
+with `session_id` / `match_id` / `client_version` / `game_id` /
+`hook_dll_sha1` for filtering. Launcher round-robin-scans every
+installed game's `upload_queue/` so orphan reports get picked up even
+if you launch the launcher without re-selecting your game.
+
+**Immediate desync termination.** Previously the game played on through
+desyncs — accumulating tens of cascading divergences until eventually
+crashing in `character_state_machine` ~7000 frames later. Now the hook
+calls `TerminateProcess` on the very first divergence, publishes a
+distinct `FM2K_MATCH_OUTCOME_DESYNC` outcome, and the launcher shows a
+"desync detected — match not recorded" toast instead of looking like
+the game crashed for no reason. Set `FM2K_NO_DESYNC_KILL=1` to keep
+the old behavior for diagnostic sessions.
+
+**Boot straight to battle (`/F`, dev).** Engine has a built-in
+`g_debug_mode=3` path that skips splash/title/CSS and dispatches a
+battle-init game object directly. Hook detours
+`InitializeGameFromCommandLine` to re-stamp `g_iniFile_nameOverride`
+(which `hit_judge_set_function` otherwise clobbers with an empty
+default on shipped binaries). New dev checkbox + P1/P2 char/stage/meter
+inputs let you pick the exact matchup without touching CSS. ~150 ms
+from launch to battle frame.
+
+### Bug fixes
+
+- **KOF retention HP-init jitter.** SafetyHook midhook at `0x411CB1`
+  substitutes the winner's snapshotted HP into `eax` before the engine's
+  `mov [ebx+0xDF05], eax` writes it, so the engine no longer briefly
+  displays `max_hp` between rounds.
+- **Damage multiplier doesn't break Vanpri stage scripts.** Previously
+  the multiplier scaled all six `health_damage_manager` call sites,
+  including the script-side mirror writes that Vanpri's stage triggers
+  use for tightly-balanced self/opponent exchanges. Now the hook
+  stack-walks the return address and only scales damage from
+  `hit_detection_system`'s two actual hit-damage call sites.
+
+### Misc
+
+- Per-game patches v2: `team_css_dupe_lock`, `team_kof_retention`,
+  `team_size`, `damage_multiplier_pct`, `gs_pic_fix` all driven by
+  per-game INI under `%APPDATA%\FM2K_Rollback\game_patches\<game_id>.ini`,
+  edited via the launcher's Patches panel.
+- Story-init AI hijack midhook at `0x411C8F` for the 1P→VS-CSS
+  sub-modes (VS CPU / Training / CPU vs CPU) so P2 actually gets AI
+  fields instead of standing still.
+- Stats site restyle + per-match rounds table.
+
+### What's not changed since v0.2.39
+
+Spectator code path is unchanged. FULL_SESSION remains the default;
+CURRENT_MATCH (snapshot join) still opt-in via
+`--spectate-mode current`. Next iteration will wire `/F` into the
+spectator launch path so mid-battle joiners don't visibly walk title +
+CSS before the snapshot applies.
+
+### Dev tool
+
+`tools/fm2k_logs.py` for pulling uploaded bundles:
+- `recent --limit N [--kind X]` — list uploads
+- `pull <session_id>` — rsync a session's bundles locally
+- `show <session_id> --tail 200` — pull + print meta + log content
+- `tail` — long-poll for new uploads
+
+**Downloads:**
+  - [fm2k_v0.2.40.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.40/fm2k_v0.2.40.zip) (9.2 MB)
+
+---
+
 ## v0.2.39 — 2026-05-09
 
 _Tag: [`v0.2.39`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.39)_
