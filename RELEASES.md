@@ -1,5 +1,30 @@
 # Releases
 
+## v0.2.42 — 2026-05-15
+
+_Tag: [`v0.2.42`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.42)_
+
+## v0.2.42 — hotfix: launcher idle CPU/GPU
+
+**Symptom:** users reported the launcher (no game running, just sitting on the panel) eating ~17–22% CPU **and** ~17–22% GPU on machines like Xeon E3 1230 v3 + GTX 1060 and on a 3060. That's wildly too much for static ImGui panels.
+
+**Cause:** vsync was the only framerate cap. `SDL_SetRenderVSync(renderer, 1)` can silently fall back to a no-op path (RDP / headless / software renderer / driver refused), and presents on a minimized window complete instantly with no real swap. In either case the launcher spun `SDL_AppIterate` as fast as the CPU would allow.
+
+**Fix** (in `SDL_AppIterate`):
+- Window minimized/hidden → skip render entirely, `SDL_Delay(100)`. Events still pump via `SDL_AppEvent` so a restore wakes us up.
+- Unfocused → soft-cap to ~30 fps.
+- Focused but vsync didn't take → software 60 fps cap via `SDL_DelayNS`.
+- Focused with working vsync → unchanged.
+
+Also instrumented renderer init: the launcher log now reports the picked renderer name + vsync state, so a future "this still runs hot for me" report tells us which driver path the user landed on.
+
+No spectator / netcode / upload-pipeline changes since v0.2.41 — those are still cooking. Update is drop-in safe.
+
+**Downloads:**
+  - [fm2k_v0.2.42.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.42/fm2k_v0.2.42.zip) (9.2 MB)
+
+---
+
 ## v0.2.41 — 2026-05-13
 
 _Tag: [`v0.2.41`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.41)_
