@@ -1,5 +1,30 @@
 # Releases
 
+## v0.2.43 — 2026-05-15
+
+_Tag: [`v0.2.43`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.43)_
+
+## v0.2.43 — hotfix: per-game input override now actually applies offline
+
+**Reporter:** Sheriel [GUP].
+
+**Symptom:** "Use override for `<game>`" forked the per-game `.ini` file and the launcher's binder appeared to save changes, but the changes never took effect once the game launched. Tested on URORFG and CC — same broken behavior on both. Editing the game's own in-engine controls menu also didn't help.
+
+**Cause:** `Hook_GetPlayerInput` (the FM2K offline / CSS / battle code path) called the binder's lazy `Init()` but never called `SetGameProfile()` first. With no game stem set, `Load()` always resolved to the default `%APPDATA%\FM2K_Rollback\fm2k_inputs.ini` and the per-game `fm2k_inputs_<exe_stem>.ini` was never read.
+
+Online play (GekkoNet) wasn't affected because it routes through a different function (`Input_CaptureLocal`) that already did the right thing. So this is purely an offline-play bug.
+
+Side-note for the "in-game controls menu didn't help either" part: when the binder is active (which it always is, with our default bindings), our hook returns the binder's sample and the engine's own `get_player_input` never runs. That's by design — the in-engine controls menu is bypassed by the hook regardless of which profile is loaded. To customize, use the launcher's binder UI with the per-game override toggle.
+
+**Fix:** wire `SetGameProfile()` + a periodic `Load()` into `Hook_GetPlayerInput`'s 1-second binder-active probe, mirroring the existing routing in `Input_CaptureLocal`. The exe stem is logged once on first resolution so field reports are easy to verify.
+
+Drop-in safe; no protocol or save-state changes. Spectator / netcode / upload pipeline unchanged from v0.2.42.
+
+**Downloads:**
+  - [fm2k_v0.2.43.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.43/fm2k_v0.2.43.zip) (9.2 MB)
+
+---
+
 ## v0.2.42 — 2026-05-15
 
 _Tag: [`v0.2.42`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.42)_
