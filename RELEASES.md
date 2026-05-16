@@ -1,5 +1,40 @@
 # Releases
 
+## v0.2.48 — 2026-05-16
+
+_Tag: [`v0.2.48`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.48)_
+
+## v0.2.48 — Phase F: replay determinism fix (intermediate-frame RNG drift)
+
+### What this fixes
+
+Every v0.2.43 desync report in the hub log had the same diagnostic signature: `GameplayFingerprint forward != replay` on every frame, `RNG_Seed forward != replay` on 3 of 5. The parity-diff tool corroborated: first divergence always in `p1_pos / p1_script`, **never** in RNG — a classic input/state cascade from a deterministic-sim leak.
+
+**The cause**: rollback batches run `[Load → AdvanceEvent → SaveEvent → AdvanceEvent → SaveEvent → ... → render-once-at-end]`. Render fires at most once per batch, so `PatchPostRenderRng` only updates the LAST save's RNG with the post-render value. Every intermediate `SaveEvent` overwrites the previously-patched RNG with the post-sim value. Result: replay sim for frame K+2 starts from POST-sim-(K+1) instead of POST-render-(K+1). Render's RNG delta (R_{K+1}) is missing on replay. Per-frame, the divergence accumulates and eventually trips GekkoNet's desync detector.
+
+This is the long-running "match desyncs mid-game, both players' games close immediately" bug that's been hitting pkmncc, WonderfulWorld, URORFG across multiple users since the v0.2.40 immediate-terminate behavior went in.
+
+**The fix**: store POST-render RNG in a *parallel* buffer that `SaveState_Save` doesn't touch. Only `PatchPostRenderRng` writes to it, tagged with the frame number so stale values from a previous match don't replay. Before each `AdvanceEvent`'s sim call, look up the stored POST-render RNG for the previous frame and overwrite the engine's live RNG with it. On the forward path this is a no-op (engine RNG already matches). On the rollback path it re-establishes the right starting RNG for each intermediate frame.
+
+### What this means for you
+- **You should stop seeing the "match ended unexpectedly, both games closed" mid-match desyncs**.
+- Spectator and `.fm2krep` replay should now stay in sync with the host's actual run for the entire match (combined with v0.2.47's SOCD pre-apply fix).
+- This DOES NOT retroactively fix old `.fm2krep` files; those were recorded with the buggy RNG sequence.
+
+### How to verify
+- Play a match. If you used to desync after a few thousand frames on a particular game (pkmncc, WW, URORFG, vanpri), it should not desync anymore — or if it does, the diagnostic in the upload pipeline will show a *different* signature and we'll know we're in new territory.
+- Run stress mode locally (dev menu) — the GekkoStressSession rolls back every check_distance frames. Pre-fix this would desync within a few hundred frames; post-fix it should run for a long time without tripping.
+
+### Reminder for users still on v0.2.41
+v0.2.41 has an unrelated `FM2KHook.dll` crash that was fixed in v0.2.42+. If your match closes WITHOUT a desync diagnostic in the log, you're hitting that, and need to click the "Update" pill in the launcher's top-right.
+
+Notes carried from v0.2.42 → .47: vsync idle CPU/GPU soft-cap, per-game input override actually applies offline, launcher resilience against bad upload manifests, hook-side UTF-8 manifests, match-result queue across hub WS drops, SOCD picker actually applies, controller hot-plug, UI polish (refresh-id collision, Edit-button visibility, path slash normalization, doubled ellipsis, session-record on titlebar), SOCD-pre-apply on spec capture.
+
+**Downloads:**
+  - [fm2k_v0.2.48.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.48/fm2k_v0.2.48.zip) (9.2 MB)
+
+---
+
 ## v0.2.47 — 2026-05-16
 
 _Tag: [`v0.2.47`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.47)_
