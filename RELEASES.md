@@ -1,5 +1,53 @@
 # Releases
 
+## v0.2.45 — 2026-05-16
+
+_Tag: [`v0.2.45`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.45)_
+
+## v0.2.45 — match wins now count after long pauses + SOCD picker actually applies offline
+
+Two real-world bugs from the forum, both "thing I configured silently does nothing" with a confusingly-cheerful UI:
+
+### 1. Match wins not counting after a long pause (aprl, Spooder, pringle, Patrick, toki)
+
+**Symptom:** a long pause mid-set, then subsequent wins don't update the W/L. aprl reported 12-5 instead of 15-5 after a ft5. Spooder reported "played a looooong set, but not a single match was recorded." pringle suspected the long-pause angle, called it.
+
+**Cause:** when the hub WebSocket dropped (long-pause keepalive timeout is the classic trigger), `PollMatchOutcome` early-returned silently. Every subsequent match outcome was lost for the rest of the set. The local `results.csv` mirror was also gated behind the same early-return, so the per-user record drifted too.
+
+**Fix:** outcomes now fall through on disconnect. Local CSV writes immediately (every match is captured offline-side, no matter what the hub is doing). The hub send is queued onto a per-launcher `pending_match_results` vector; on reconnect the K::Connected handler drains the queue and replays every entry. W/L/D + recent-matches refresh after the catch-up, so the UI snaps to the corrected totals right away.
+
+Launcher restarts will still lose pending entries — but the local CSV already captured them, so the **per-user** record stays accurate even if the hub is permanently down.
+
+### 2. SOCD picker doesn't apply offline (Froglet)
+
+**Symptom:** the SOCD combo in the input binder appeared to save fine but the spawned game always ran at the default (Hitbox SOCD — L+R neutral, U+D = U wins). No matter what you picked, you got the default.
+
+**Cause (two-fold):**
+- The launcher wrote `FM2K_SOCD_MODE_P1` / `_P2` via `_putenv_s`, but the hook reads `FM2K_SOCD_MODE` (no suffix), AND `_putenv_s` writes the CRT env table — CreateProcess inherits the **Win32** env table. So even the suffixed vars never reached the child process.
+- `StartOfflineSession` never set `FM2K_SOCD_MODE` at all; only the online K::MatchStart handler did. Offline play therefore always ran at the compiled-in default.
+
+**Fix:** `::SetEnvironmentVariableA("FM2K_SOCD_MODE", ...)` from `LoadSocdState` (so the first launch inherits the saved setting) and from the combo change handler (live update). Online K::MatchStart still re-applies the role-resolved per-slot value on top, so host/guest each pick their own.
+
+### Also in this build
+
+- v0.2.44's launcher resilience (Ianthina's bad-UTF-8 manifest crash) is still in.
+- Hook now emits valid UTF-8 manifests (game_id + paths via the wide Win32 APIs).
+- Per-game input override actually loads offline (v0.2.43).
+- Idle CPU/GPU vsync soft-cap (v0.2.42).
+- Games-folder window has Browse buttons via SDL3's native folder picker.
+- New: per-game input binder offline routing works for all FM2K games (was online-only).
+
+### Known issues still being investigated
+
+- Computed-delay can pick different values on the two peers when the link is jittery (Melancholy, toki). On stable links both peers see the same RTT and agree; on jittery links the means drift. **Workaround:** flip the launcher's Delay combo from "computed" to a fixed value (8–12 is a good starting range) to force symmetric delay until the fix lands.
+- Replay desync past ~4000 frames and spectator-mid-battle determinism (para). Still open.
+- Audio/music continues into CSS (toki). Acknowledged as a core 2dfm-rollback issue.
+
+**Downloads:**
+  - [fm2k_v0.2.45.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.45/fm2k_v0.2.45.zip) (9.2 MB)
+
+---
+
 ## v0.2.44 — 2026-05-16
 
 _Tag: [`v0.2.44`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.44)_
