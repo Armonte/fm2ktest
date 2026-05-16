@@ -1,5 +1,36 @@
 # Releases
 
+## v0.2.46 — 2026-05-16
+
+_Tag: [`v0.2.46`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.46)_
+
+## v0.2.46 — controller hotplug + UI polish sweep + v0.2.43 regression fix
+
+### Controller hot-plug (Suicidal Muffin)
+Plug a pad in or lose one mid-match? The binder now auto-refreshes on a 1 s cadence inside the running game AND on `SDL_EVENT_GAMEPAD_ADDED / _REMOVED` in the launcher. No more "you have to restart the session to re-bind the pad you just plugged in."
+
+### UI polish sweep
+- **Refresh button collisions** (FlippySpatula): the Recent Matches and Live Matches panels both had a "Refresh" button with the same hashed ID — clicking one fired the other. Each now has a `PushID` isolation so they're independent.
+- **Doubled ellipsis** (FlippySpatula): the "Waiting for X to accept..." modal had a trailing `...` in the locale string that doubled with the animated cycling dot pip. Removed in en/es/ja so it just reads "Waiting for X to accept" + the live pip.
+- **Edit games button hidden when column narrow** (FlippySpatula): the long path string previously consumed the row and pushed the Edit button off-screen with no way to recover. Button is rendered first now; path wraps below.
+- **Scraped path slash style mismatch** (FlippySpatula): scraped games used `/` while user-typed root used `\\`. Normalized to `\\` on Windows so the visible paths line up.
+- **Score at top of window shows overall, not session** (Patrick): added per-launcher-session counters that increment per committed match (disconnect doesn't count) and reset on launcher restart. Shown as ` • session N-M-K` suffix on the title bar and as a small `(+N-M-K)` next to the overall record in the players-table self-row, with a tooltip clarifying the scope. Also clarifies toki's "purpose of W/L record vs self isn't stated."
+
+### Regression fix — v0.2.43 per-game input routing restored
+v0.2.45 went out without the v0.2.43 per-game offline routing fix because an intervening edit to the same code region (per-game patches solo-driver overrides for CSS / battle) clobbered the routing block. Sheriel's bug came back silently in v0.2.45. The routing is back in v0.2.46, with the same exe-stem resolution and one-shot routed-log so the field diagnostic line stays readable. Per-game offline overrides apply again.
+
+### Known issues NOT yet fixed
+- Computed delay can pick different values per peer when the link is jittery (Melancholy, toki). Workaround: manual delay override.
+- Replay determinism past ~4000 frames (para). Still open (Phase F).
+- "Opponent disconnected" toast can fire after a peer-initiated drop — distinguishing self-vs-peer scoping needs a deeper change.
+- Settings window too small at 150% DPI (Melancholy). Needs ImGui style scaling sweep.
+- Audio/music bleed into CSS (toki). Core 2dfm-rollback issue.
+
+**Downloads:**
+  - [fm2k_v0.2.46.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.46/fm2k_v0.2.46.zip) (9.2 MB)
+
+---
+
 ## v0.2.45 — 2026-05-16
 
 _Tag: [`v0.2.45`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.45)_
