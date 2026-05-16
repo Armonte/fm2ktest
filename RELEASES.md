@@ -1,5 +1,34 @@
 # Releases
 
+## v0.2.44 — 2026-05-16
+
+_Tag: [`v0.2.44`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.44)_
+
+## v0.2.44 — hotfix: launcher startup crash from malformed upload manifest
+
+**Reporter:** Ianthina [YURI] (game = Higurashi vs Touhou Universe 2)
+
+**Symptom:** After a desync mid-match, the launcher crashed on every startup. Reinstalling didn't help. Only manually deleting the game's `upload_queue/` folder fixed it. v0.2.40 launchers worked; v0.2.41+ broke. Windows 10.
+
+**Cause:** The hook in v0.2.41 wrote desync manifests using ANSI Win32 APIs (`GetModuleFileNameA` / `GetCurrentDirectoryA`). On Japanese-locale Windows with Japanese-named game folders, those return raw Shift-JIS bytes — not valid UTF-8. The manifest JSON ended up with mojibake in `file_paths` and `game_id`.
+
+When the launcher's `PollUploadQueue` (called every render frame) picked up that manifest and tried to construct a `std::filesystem::path` from the bytes, MinGW's libstdc++ threw on the invalid UTF-8. The exception propagated out of `Render` → out of `SDL_AppIterate` → process abort, before the user could click anything.
+
+**Fix** (launcher-side resilience):
+- **UTF-8 validation gate** — before constructing any `fs::path` from a manifest's `file_paths`, the launcher now verifies every entry is well-formed UTF-8. If not, the whole manifest is quarantined and the launcher moves on.
+- **try/catch wrapper around the upload-queue processor** — anything that does throw (filesystem error, I/O failure, anything else) is logged and swallowed. The launcher stays alive even if a future bad manifest slips past the validation gate.
+
+Existing valid manifests from JP-locale users still upload as before — the gate only rejects malformed bytes, not Japanese content in well-formed UTF-8.
+
+**For Ianthina + anyone else stuck:** updating to v0.2.44 is enough. The launcher will now scan, find the bad manifest, move it to `upload_queue/quarantine/`, and continue startup normally. No more manual deletion needed.
+
+The hook-side fix (write UTF-8 manifests to begin with) ships in the next bigger release alongside the spec/desync refactor those changes are tangled with.
+
+**Downloads:**
+  - [fm2k_v0.2.44.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.44/fm2k_v0.2.44.zip) (9.2 MB)
+
+---
+
 ## v0.2.43 — 2026-05-15
 
 _Tag: [`v0.2.43`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.43)_
