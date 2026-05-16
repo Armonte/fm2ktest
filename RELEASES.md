@@ -1,5 +1,37 @@
 # Releases
 
+## v0.2.47 — 2026-05-16
+
+_Tag: [`v0.2.47`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.47)_
+
+## v0.2.47 — Phase F partial fix: SOCD pre-apply on host before spec capture
+
+### What this fixes
+
+Replay / spectator divergence caused by **SOCD-mode-mismatch between the host and the spectator/replay**. The host's GekkoNet-delivered raw inputs were stored verbatim into the spectator stream / `.fm2krep` file; the spectator re-applied SOCD using its own `FM2K_SOCD_MODE` env var. On any frame where the user held L+R or U+D simultaneously, the two modes resolve the conflict differently, the spec engine gets a different input than the host engine, and the divergence cascades.
+
+The parity-diff dev tool had pointed at this: first divergence consistently in `p1_pos / p1_script`, NEVER in RNG. That pattern is "input was different, script chose a different action, position followed" — i.e. classic input-mismatch cascade, not a deterministic-sim leak.
+
+**Fix**: pre-apply SOCD on the host side before sending to the spectator. The stored value now carries the host's resolution. Spec's subsequent SOCD pass becomes a no-op for the resolved bits, so the spec's local mode no longer matters. Facing-flip continues to run from each side's deterministic local sim state — that part was already correct.
+
+### What this DOESN'T fix
+
+- **Older `.fm2krep` files** (recorded pre-v0.2.47) captured RAW inputs. Opening one with a v0.2.47 spec that runs a different SOCD mode is still subject to the old mismatch. New recordings are safe; the older-replay desyncs that para reported may persist for their existing files.
+- **"Spectator stuck on Connecting"** — separate issue (NAT punch / port bind / snapshot path), not addressed here.
+- **Replay desync past ~4000 frames may have additional sources** beyond SOCD (facing-flip-by-game-state corner cases, uncaptured state, RNG drift on rare paths). If a fresh v0.2.47 recording still desyncs through `parity_diff`, the SOCD fix wasn't the whole story and we'll have more digging to do.
+
+### How to verify
+
+If you can record a fresh v0.2.47 match and replay it (especially with a character / playstyle that does L+R or U+D often — taunts, command-grabs that need full circle inputs, etc.), the spec / replay should now stay in sync where it didn't before.
+
+### Otherwise in this build
+Everything from v0.2.42 → v0.2.46 (vsync soft-cap, per-game-input routing, UTF-8 manifest resilience, match-result queue on WS drop, SOCD picker working offline, controller hot-plug, UI polish sweep, etc).
+
+**Downloads:**
+  - [fm2k_v0.2.47.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.47/fm2k_v0.2.47.zip) (9.2 MB)
+
+---
+
 ## v0.2.46 — 2026-05-16
 
 _Tag: [`v0.2.46`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.46)_
