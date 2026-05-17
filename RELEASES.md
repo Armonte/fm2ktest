@@ -1,5 +1,31 @@
 # Releases
 
+## v0.2.51 — 2026-05-17
+
+_Tag: [`v0.2.51`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.51)_
+
+v0.2.51 — TCP-STUN sync resolve
+
+Fix: TCP-STUN's hub DNS resolve was using SDL_net's async resolver thread
+which has cold-startup overhead. Peers with slower DNS stacks were
+hitting the 5s timeout, so the spec couldn't learn its external TCP
+port and reported its local port to the hub. Host then punched to the
+wrong external port → TCP simultaneous-open silently failed → spec
+sat on "reconnecting" forever and the host log showed the punch firing
+but never an "Accepted subscriber".
+
+Now uses synchronous getaddrinfo (same path UDP STUN already uses
+successfully) and passes a literal IP to SDL_net so its resolver
+short-circuits via inet_pton. No more cold-thread spin-up cost.
+
+This fixes "spec works for me but not for peers" symptom where the
+host has fast DNS and the joiner doesn't.
+
+**Downloads:**
+  - [fm2k_v0.2.51.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.51/fm2k_v0.2.51.zip) (9.2 MB)
+
+---
+
 ## v0.2.50 — 2026-05-17
 
 _Tag: [`v0.2.50`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.50)_
