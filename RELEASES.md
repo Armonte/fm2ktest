@@ -1,5 +1,40 @@
 # Releases
 
+## v0.2.52 — 2026-05-17
+
+_Tag: [`v0.2.52`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.52)_
+
+v0.2.52 — TCP-STUN raw winsock bypass
+
+v0.2.51 swapped TCP-STUN's hub resolve to sync getaddrinfo and passed
+a literal IP to SDL_net. Peer logs showed the new fix LANDED ("NET
+resolve of literal IP 67.205.X.X timed out (unexpected)") but SDL_net's
+NET_WaitUntilResolved still hung even for inet_pton-compatible input.
+SDL_net's resolver thread is unreliable on some peer machines.
+
+This release bypasses SDL_net entirely for TCP-STUN — raw winsock:
+  - socket(AF_INET, SOCK_STREAM)
+  - SO_REUSEADDR + bind to local listener port (creates the NAT
+    mapping we want to probe — host punches to whatever external
+    port maps from g_listen_port)
+  - non-blocking connect with select() 1s cap
+  - SO_ERROR check to distinguish real connect from immediate refusal
+  - recv 8-byte hub reply with 500ms cap
+
+Same total wall-clock budget (~1.5s worst case) but no async resolver,
+no thread pool startup, no DNS round-trip — only socket/select. Works
+deterministically regardless of SDL_net state.
+
+Without this, peers with slow/cold SDL_net resolver report local TCP
+port (not external NAT-mapped port) to the hub, host punches the wrong
+external port, TCP simultaneous-open silently fails, and the spec sits
+in a reconnect loop forever.
+
+**Downloads:**
+  - [fm2k_v0.2.52.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.52/fm2k_v0.2.52.zip) (9.2 MB)
+
+---
+
 ## v0.2.51 — 2026-05-17
 
 _Tag: [`v0.2.51`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.51)_
