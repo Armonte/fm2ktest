@@ -1,5 +1,51 @@
 # Releases
 
+## v0.2.50 — 2026-05-17
+
+_Tag: [`v0.2.50`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.50)_
+
+v0.2.50 — spectator mid-match join overhaul
+
+Crashes / hangs fixed:
+- Stack overflow on snapshot apply (1MB SaveStateData was stack-allocated)
+- Cross-process AV in ui_state_manager (host's heap pointers in char_slot
+  were overwriting spec's local pointers — added pointer-shape preservation
+  pass in SaveState_Load for spec mode)
+- pb_queue wiped on snapshot apply, dropping 600+ backfilled inputs
+- Backfill chunks 2-3 silently lost (raised chunk size 1KB → 8KB,
+  full backfill ships in one chunk)
+
+Mid-match join correctness:
+- Spec sticky join mode: silence-failover reconnect preserves CURRENT_MATCH
+  instead of falling through to FULL_SESSION default
+- Initial JOIN_REQ bumps reconnect backoff so a redundant resend can't
+  race the host's first JOIN_ACK
+- SPEC_JOIN_ACK now carries host_p1_char / host_p2_char / host_stage so
+  spec /F-boot loads the right .player files instead of mirror char 0
+- BTB env-var fallthrough via PerGamePatches_SetRuntimeBtbOverrides
+  (SetEnvironmentVariableA → getenv races CRT's _environ cache)
+- session_kind plumbing hook→hub→spec_launcher: spec /F-boots when
+  host is in battle, walks normal title→CSS when host is in CSS/menu
+- HOST_CONFIG pushed to spec on subscriber bind (was only broadcast
+  at battle-start, missed by mid-match joiners)
+- HOST_CONFIG now actually plumbs round_time_sec / round_count /
+  game_speed_pct (was 0 placeholders; engine addrs were already known
+  via hit_judge_set_function). Sentinel changed from 0 to 0xFFFFFFFF
+  since 0 is a valid infinite-timer value.
+
+CSS phase:
+- CSS-phase catchup: queue drains aggressively while host is in CSS so
+  spec isn't 400 frames behind when battle starts
+
+Cosmetic:
+- g_debug_mode zeroed after slot-0 dispatcher fires — kills the
+  "テストプレイ" title bar suffix from /F debug mode
+
+**Downloads:**
+  - [fm2k_v0.2.50.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.50/fm2k_v0.2.50.zip) (9.2 MB)
+
+---
+
 ## v0.2.48 — 2026-05-16
 
 _Tag: [`v0.2.48`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.48)_
