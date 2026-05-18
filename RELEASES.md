@@ -1,5 +1,20 @@
 # Releases
 
+## v0.2.56 — 2026-05-18
+
+_Tag: [`v0.2.56`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.56)_
+
+0.2.56 -- dev
+
+- channel-switch downgrade pill actually works now
+- dev channel picks newest of stable or dev
+- killed 15MB rollback-stats log spam
+
+**Downloads:**
+  - [fm2k_v0.2.56.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.56/fm2k_v0.2.56.zip) (9.2 MB)
+
+---
+
 ## v0.2.55 — 2026-05-18
 
 _Tag: [`v0.2.55`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.55)_
