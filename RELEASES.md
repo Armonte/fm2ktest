@@ -1,5 +1,36 @@
 # Releases
 
+## v0.2.53 — 2026-05-18
+
+_Tag: [`v0.2.53`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.53)_
+
+v0.2.53 — SDL_net resolver IPv6/literal-IP fix
+
+Pulled SDL_net docs + source after v0.2.52. Found root cause: vendored
+SDL_net's ResolveAddress calls getaddrinfo with hints=NULL —
+AF_UNSPEC (queries A+AAAA) and no AI_NUMERICHOST (DNS path even for
+literal IPs). On Windows boxes with IPv6 enabled but no IPv6
+connectivity (common consumer ISP setup), the AAAA query stalls the
+resolver thread. Our UDP STUN already uses AF_INET hint and works
+universally — same fix applied here.
+
+Patch to vendored SDL_net.c ResolveAddress:
+  - hints.ai_family = AF_INET (forces IPv4, skips AAAA stall)
+  - hints.ai_flags |= AI_NUMERICHOST when input is a literal IPv4
+    (instant short-circuit, no DNS query)
+
+Safe because we're IPv4-only project-wide. Single-function change,
+no API surface change. Benefits ConnectUpstream (spec's TCP dial
+to host's listener after JOIN_ACK) which still uses SDL_net's
+resolver.
+
+v0.2.52's raw winsock TCP-STUN stays in place. Unit tests 63/63.
+
+**Downloads:**
+  - [fm2k_v0.2.53.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.53/fm2k_v0.2.53.zip) (9.2 MB)
+
+---
+
 ## v0.2.52 — 2026-05-17
 
 _Tag: [`v0.2.52`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.52)_
