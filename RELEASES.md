@@ -1,5 +1,20 @@
 # Releases
 
+## v0.2.54 — 2026-05-18
+
+_Tag: [`v0.2.54`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.54)_
+
+v0.2.54
+
+- spec changes
+- launcher has update channel stable/dev
+- legacy/direct spectator panel exposed
+
+**Downloads:**
+  - [fm2k_v0.2.54.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.54/fm2k_v0.2.54.zip) (9.2 MB)
+
+---
+
 ## v0.2.53 — 2026-05-18
 
 _Tag: [`v0.2.53`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.53)_
