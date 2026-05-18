@@ -1,5 +1,22 @@
 # Releases
 
+## v0.2.55 — 2026-05-18
+
+_Tag: [`v0.2.55`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.55)_
+
+infra test — validating dev channel + webhook
+
+same code as v0.2.54 stable, just cut as pre-release to confirm:
+- dev channel auto-update path works
+- 🚧⚠️ embed styling in #releases
+- 2dfm-dev role ping fires for opted-in users
+- launcher menu bar shows Dev(0.2.55) after auto-check
+
+**Downloads:**
+  - [fm2k_v0.2.55.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.55/fm2k_v0.2.55.zip) (9.2 MB)
+
+---
+
 ## v0.2.54 — 2026-05-18
 
 _Tag: [`v0.2.54`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.54)_
