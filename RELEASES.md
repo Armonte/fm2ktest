@@ -1,3 +1,14 @@
+## v0.2.57 — 2026-05-18
+
+_Tag: [`v0.2.57`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.57)_
+
+v0.2.57 -- log spam fix, [BEAT] heartbeat, F8 runahead toggle, better defaults
+
+**Downloads:**
+  - [fm2k_v0.2.57.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.57/fm2k_v0.2.57.zip) (9.3 MB)
+
+---
+
 # Releases
 
 ## v0.2.57 — 2026-05-18
