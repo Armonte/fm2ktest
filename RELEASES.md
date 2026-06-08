@@ -1,3 +1,16 @@
+# Releases
+
+## v0.2.59-bleeding — 2026-06-08
+
+_Tag: [`v0.2.59-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.59-bleeding)_
+
+render-RNG determinism fix (palette/afterimage desync+crash) + restore crash-upload telemetry (secret was baking empty)
+
+**Downloads:**
+  - [fm2k_v0.2.59-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.59-bleeding/fm2k_v0.2.59-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.58-bleeding — 2026-06-08
 
 _Tag: [`v0.2.58-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.58-bleeding)_
