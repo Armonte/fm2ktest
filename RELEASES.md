@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.61 — 2026-06-08
+
+_Tag: [`v0.2.61`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.61)_
+
+rollback determinism fix (palette/afterimage desync+crash), controller stick + SOCD fixes, crash-report telemetry restored, fixes the 'installed correctly?' popup, proper Stable/Dev/Bleeding channels
+
+**Downloads:**
+  - [fm2k_v0.2.61.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.61/fm2k_v0.2.61.zip) (9.3 MB)
+
+---
+
 ## v0.2.60-bleeding — 2026-06-08
 
 _Tag: [`v0.2.60-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.60-bleeding)_
