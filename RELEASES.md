@@ -1,3 +1,16 @@
+# Releases
+
+## v0.2.58-bleeding — 2026-06-08
+
+_Tag: [`v0.2.58-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.58-bleeding)_
+
+controller stick + local-2P P2 input fixes, symmetric delay negotiation w/ avg+peak ping, host log-flood fix
+
+**Downloads:**
+  - [fm2k_v0.2.58-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.58-bleeding/fm2k_v0.2.58-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.57 — 2026-05-18
 
 _Tag: [`v0.2.57`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.57)_
