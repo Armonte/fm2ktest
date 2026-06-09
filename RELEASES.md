@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.64-bleeding — 2026-06-09
+
+_Tag: [`v0.2.64-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.64-bleeding)_
+
+fix 0.2.46 95fps regression (gamepad re-scan hitch) + rollback counter + log-drain
+
+**Downloads:**
+  - [fm2k_v0.2.64-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.64-bleeding/fm2k_v0.2.64-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.63-bleeding — 2026-06-09
 
 _Tag: [`v0.2.63-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.63-bleeding)_
