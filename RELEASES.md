@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.63-bleeding — 2026-06-09
+
+_Tag: [`v0.2.63-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.63-bleeding)_
+
+drain stranded crash/desync logs from all games; quieter [MSG] log
+
+**Downloads:**
+  - [fm2k_v0.2.63-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.63-bleeding/fm2k_v0.2.63-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.62-bleeding — 2026-06-09
 
 _Tag: [`v0.2.62-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.62-bleeding)_
