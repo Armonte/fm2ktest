@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.62-bleeding — 2026-06-09
+
+_Tag: [`v0.2.62-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.62-bleeding)_
+
+hotfix for bleeding
+
+**Downloads:**
+  - [fm2k_v0.2.62-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.62-bleeding/fm2k_v0.2.62-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.62 — 2026-06-08
 
 _Tag: [`v0.2.62`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.62)_
