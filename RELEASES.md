@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.65-bleeding — 2026-06-10
+
+_Tag: [`v0.2.65-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.65-bleeding)_
+
+fix auto-upload secret (crash/desync logs were silently not uploading since 0.2.62)
+
+**Downloads:**
+  - [fm2k_v0.2.65-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.65-bleeding/fm2k_v0.2.65-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.64 — 2026-06-09
 
 _Tag: [`v0.2.64`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.64)_
