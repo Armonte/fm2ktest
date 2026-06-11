@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.66-bleeding — 2026-06-11
+
+_Tag: [`v0.2.66-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.66-bleeding)_
+
+fix launcher freeze/unresponsiveness (uploads now drain off the UI thread)
+
+**Downloads:**
+  - [fm2k_v0.2.66-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.66-bleeding/fm2k_v0.2.66-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.65 — 2026-06-11
 
 _Tag: [`v0.2.65`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.65)_
