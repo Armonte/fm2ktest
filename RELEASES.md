@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.69-bleeding — 2026-06-11
+
+_Tag: [`v0.2.69-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.69-bleeding)_
+
+modern native folder picker (IFileOpenDialog) + multi-select for games dirs
+
+**Downloads:**
+  - [fm2k_v0.2.69-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.69-bleeding/fm2k_v0.2.69-bleeding.zip) (9.4 MB)
+
+---
+
 ## v0.2.68-bleeding — 2026-06-11
 
 _Tag: [`v0.2.68-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.68-bleeding)_
