@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.70 — 2026-06-11
+
+_Tag: [`v0.2.70`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.70)_
+
+launcher: fix UI freeze + netplay lag from log uploads, native folder picker, cross-version match block, telemetry restored
+
+**Downloads:**
+  - [fm2k_v0.2.70.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.70/fm2k_v0.2.70.zip) (9.4 MB)
+
+---
+
 ## v0.2.70-bleeding — 2026-06-11
 
 _Tag: [`v0.2.70-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.70-bleeding)_
