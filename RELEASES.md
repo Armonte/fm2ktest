@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.68-bleeding — 2026-06-11
+
+_Tag: [`v0.2.68-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.68-bleeding)_
+
+native folder Browse button for games dirs + full es/ja locale coverage
+
+**Downloads:**
+  - [fm2k_v0.2.68-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.68-bleeding/fm2k_v0.2.68-bleeding.zip) (9.3 MB)
+
+---
+
 ## v0.2.67-bleeding — 2026-06-11
 
 _Tag: [`v0.2.67-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.67-bleeding)_
