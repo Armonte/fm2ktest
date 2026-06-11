@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.65 — 2026-06-11
+
+_Tag: [`v0.2.65`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.65)_
+
+fix 95fps regression (gamepad re-scan) + restore crash/desync auto-upload (dead since 0.2.62)
+
+**Downloads:**
+  - [fm2k_v0.2.65.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.65/fm2k_v0.2.65.zip) (9.3 MB)
+
+---
+
 ## v0.2.65-bleeding — 2026-06-10
 
 _Tag: [`v0.2.65-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.65-bleeding)_
