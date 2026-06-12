@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.71 — 2026-06-12
+
+_Tag: [`v0.2.71`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.71)_
+
+Random stage range is now saved per game and clamped to the game's real stage list, so an oversized range can never load a missing stage (thanks Patrick)
+
+**Downloads:**
+  - [fm2k_v0.2.71.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.71/fm2k_v0.2.71.zip) (9.4 MB)
+
+---
+
 ## v0.2.70 — 2026-06-11
 
 _Tag: [`v0.2.70`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.70)_
