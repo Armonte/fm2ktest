@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.72-bleeding — 2026-06-12
+
+_Tag: [`v0.2.72-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.72-bleeding)_
+
+Netplay heap-corruption crash fix (the counterhit AV babel hit) + the full spectator/rematch/adaptive-bank pile and per-game stage range. Bleeding testers: please try to repro the counterhit crash in real matches
+
+**Downloads:**
+  - [fm2k_v0.2.72-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.72-bleeding/fm2k_v0.2.72-bleeding.zip) (9.5 MB)
+
+---
+
 ## v0.2.71 — 2026-06-12
 
 _Tag: [`v0.2.71`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.71)_
