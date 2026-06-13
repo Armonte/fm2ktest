@@ -1,3 +1,16 @@
+# Releases
+
+## v0.2.76-bleeding — 2026-06-13
+
+_Tag: [`v0.2.76-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.76-bleeding)_
+
+diagnostic: relay RTT-match logging (BEAT-RELAY addr-match + post-connect peer re-latch warn) to pin the relay ping=0 / one-sided-rollback root before fixing
+
+**Downloads:**
+  - [fm2k_v0.2.76-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.76-bleeding/fm2k_v0.2.76-bleeding.zip) (9.5 MB)
+
+---
+
 ## v0.2.75-bleeding — 2026-06-13
 
 _Tag: [`v0.2.75-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.75-bleeding)_
