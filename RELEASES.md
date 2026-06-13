@@ -1,3 +1,14 @@
+## v0.2.75-bleeding — 2026-06-13
+
+_Tag: [`v0.2.75-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.75-bleeding)_
+
+render: SIMD + threaded software compositor for heavy stages (default-on bleeding, FM2K_BLIT_SIMD=0 opts out); netplay heavy-stage catch-up default OFF; NAT cone/symmetric classification reporting (Phase 2a)
+
+**Downloads:**
+  - [fm2k_v0.2.75-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.75-bleeding/fm2k_v0.2.75-bleeding.zip) (9.5 MB)
+
+---
+
 # Releases
 
 ## v0.2.75-bleeding — 2026-06-13
