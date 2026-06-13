@@ -1,3 +1,16 @@
+# Releases
+
+## v0.2.74-bleeding — 2026-06-13
+
+_Tag: [`v0.2.74-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.74-bleeding)_
+
+UPnP-IGD automatic port mapping (Phase 1 NAT reachability): the launcher opens the game's UDP port on the router at hub-connect so hard-NAT users become directly reachable; hub honors the mapped port (CGNAT-guarded). Falls through to punch/relay on any failure; FM2K_NO_UPNP=1 disables it.
+
+**Downloads:**
+  - [fm2k_v0.2.74-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.74-bleeding/fm2k_v0.2.74-bleeding.zip) (9.5 MB)
+
+---
+
 ## v0.2.73-bleeding — 2026-06-13
 
 _Tag: [`v0.2.73-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.73-bleeding)_
