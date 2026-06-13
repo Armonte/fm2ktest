@@ -1,3 +1,14 @@
+## v0.2.73-bleeding — 2026-06-13
+
+_Tag: [`v0.2.73-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.73-bleeding)_
+
+0.2.73-bleeding: heavy-stage sim/render decouple (offline + netplay) holds 100fps sim with no desyncs (verified under clumsy 500ms RTT + packet loss + rollback); adds dual sim/render fps title counter; carries the relay Phase 0 floor
+
+**Downloads:**
+  - [fm2k_v0.2.73-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.73-bleeding/fm2k_v0.2.73-bleeding.zip) (9.5 MB)
+
+---
+
 # Releases
 
 ## v0.2.73-bleeding — 2026-06-13
