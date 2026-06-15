@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.73 — 2026-06-15
+
+_Tag: [`v0.2.73`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.73)_
+
+Performance: hook DLL now built -O2 (per-frame rollback path was -O0 in every prior release) + launcher idle-throttle (focused-idle UI 60->15fps)
+
+**Downloads:**
+  - [fm2k_v0.2.73.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.73/fm2k_v0.2.73.zip) (8.8 MB)
+
+---
+
 ## v0.2.72 — 2026-06-15
 
 _Tag: [`v0.2.72`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.72)_
