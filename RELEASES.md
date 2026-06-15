@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.72 — 2026-06-15
+
+_Tag: [`v0.2.72`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.72)_
+
+Win8.0 connectivity fix: WinHTTP DEFAULT_PROXY (AUTOMATIC proxy mode needs Win8.1+, failed at launcher startup). Win8 users grab this build manually once, then auto-update resumes.
+
+**Downloads:**
+  - [fm2k_v0.2.72.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.72/fm2k_v0.2.72.zip) (9.4 MB)
+
+---
+
 ## v0.2.76-bleeding — 2026-06-13
 
 _Tag: [`v0.2.76-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.76-bleeding)_
