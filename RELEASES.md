@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.74 — 2026-06-16
+
+_Tag: [`v0.2.74`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.74)_
+
+0.2.74: lobby stealth mode -- Hub panel toggle (live, no reconnect) keeps your match + characters out of the lobby and public stats (for testing unreleased builds)
+
+**Downloads:**
+  - [fm2k_v0.2.74.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.74/fm2k_v0.2.74.zip) (8.8 MB)
+
+---
+
 ## v0.2.73 — 2026-06-15
 
 _Tag: [`v0.2.73`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.73)_
