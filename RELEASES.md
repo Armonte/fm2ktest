@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.77-bleeding — 2026-06-17
+
+_Tag: [`v0.2.77-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.77-bleeding)_
+
+event-driven UI repaint: idle/backgrounded launcher stops the full imgui redraw every frame (fixes weak-CPU pegging + the launcher tanking the game's framerate after launch); also the repo now builds from a clean clone -- gekkonet flattened in-tree, kgt parity header vendored, submodule auto-init
+
+**Downloads:**
+  - [fm2k_v0.2.77-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.77-bleeding/fm2k_v0.2.77-bleeding.zip) (9.4 MB)
+
+---
+
 ## v0.2.74 — 2026-06-16
 
 _Tag: [`v0.2.74`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.74)_
