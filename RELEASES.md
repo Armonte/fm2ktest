@@ -1,3 +1,14 @@
+## v0.2.75 — 2026-06-21
+
+_Tag: [`v0.2.75`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.75)_
+
+Fix launcher crash for accented/non-ASCII Windows usernames; same-house players now auto-connect over LAN; new launcher.log for crash diagnostics
+
+**Downloads:**
+  - [fm2k_v0.2.75.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.75/fm2k_v0.2.75.zip) (8.8 MB)
+
+---
+
 # Releases
 
 ## v0.2.75 — 2026-06-21
