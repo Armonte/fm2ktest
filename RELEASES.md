@@ -1,3 +1,16 @@
+# Releases
+
+## v0.2.78-bleeding — 2026-06-21
+
+_Tag: [`v0.2.78-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.78-bleeding)_
+
+same-house auto-LAN (same-router pairs connect direct over LAN), launcher.log diagnostics, non-ASCII username crash fix
+
+**Downloads:**
+  - [fm2k_v0.2.78-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.78-bleeding/fm2k_v0.2.78-bleeding.zip) (9.5 MB)
+
+---
+
 ## v0.2.75 — 2026-06-21
 
 _Tag: [`v0.2.75`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.75)_
