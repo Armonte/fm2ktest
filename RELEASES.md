@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.80-bleeding — 2026-07-17
+
+_Tag: [`v0.2.80-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.80-bleeding)_
+
+spectator hardening: rematch-seam confirm-mask hold + duplicate-op idempotency (EVENT_BATCH2) + same-version spectate gate; URORFG hub-match spawn fix
+
+**Downloads:**
+  - [fm2k_v0.2.80-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.80-bleeding/fm2k_v0.2.80-bleeding.zip) (9.7 MB)
+
+---
+
 ## v0.2.79-bleeding — 2026-07-17
 
 _Tag: [`v0.2.79-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.79-bleeding)_
