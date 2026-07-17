@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.79-bleeding — 2026-07-17
+
+_Tag: [`v0.2.79-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.79-bleeding)_
+
+RC/FEC transport + host-clock rift fix, IPv6 dual-stack + NAT classify fixes, same-house auto-LAN, spectator rematch/gap-fill/host-gone hardening + fencepost desync tooling, cnc-ddraw v7.1.0.0 pin + F4/SJIS fixes, BGM rollback, binder GUID device identity, 2dfm Studio + kgt sound tools, FM95 netplay arc (WIP)
+
+**Downloads:**
+  - [fm2k_v0.2.79-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.79-bleeding/fm2k_v0.2.79-bleeding.zip) (9.7 MB)
+
+---
+
 ## v0.2.78-bleeding — 2026-06-21
 
 _Tag: [`v0.2.78-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.78-bleeding)_
