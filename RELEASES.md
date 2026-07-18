@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.81-bleeding — 2026-07-18
+
+_Tag: [`v0.2.81-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.81-bleeding)_
+
+netplay resilience: survive carrier-NAT mid-session port rebinds (battle-entry freeze fix) + match-end rollback crash fix (afterimage-over-freed-heap), validated on a CGNAT-rebind proxy rig
+
+**Downloads:**
+  - [fm2k_v0.2.81-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.81-bleeding/fm2k_v0.2.81-bleeding.zip) (9.7 MB)
+
+---
+
 ## v0.2.80-bleeding — 2026-07-17
 
 _Tag: [`v0.2.80-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.80-bleeding)_
