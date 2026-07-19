@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.82 — 2026-07-19
+
+_Tag: [`v0.2.82`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.82)_
+
+spectate fixed: RC-over-UDP default transport (TCP-free join) + frame-0 desync fix + wedge forensics
+
+**Downloads:**
+  - [fm2k_v0.2.82.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.82/fm2k_v0.2.82.zip) (9.7 MB)
+
+---
+
 ## v0.2.81-bleeding — 2026-07-18
 
 _Tag: [`v0.2.81-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.81-bleeding)_
