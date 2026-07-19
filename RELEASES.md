@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.83-bleeding — 2026-07-19
+
+_Tag: [`v0.2.83-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.83-bleeding)_
+
+relay auto-fallback for hard NATs (spectate works even when direct UDP fails) + mid-set freeze root fix + 120Hz spectator pacing + snapshot-join ordering + full IP masking in logs
+
+**Downloads:**
+  - [fm2k_v0.2.83-bleeding.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.83-bleeding/fm2k_v0.2.83-bleeding.zip) (9.7 MB)
+
+---
+
 ## v0.2.82-bleeding — 2026-07-19
 
 _Tag: [`v0.2.82-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.82-bleeding)_
