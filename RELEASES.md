@@ -1,5 +1,16 @@
 # Releases
 
+## v0.2.84 — 2026-08-29
+
+_Tag: [`v0.2.84`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.84)_
+
+spectate desync under loss and the high-RTT character-select freeze are fixed; first run now asks for your games folder instead of hiding it behind "Edit..."
+
+**Downloads:**
+  - [fm2k_v0.2.84.zip](https://github.com/Armonte/fm2ktest/releases/download/v0.2.84/fm2k_v0.2.84.zip) (9.9 MB)
+
+---
+
 ## v0.2.83-bleeding — 2026-07-19
 
 _Tag: [`v0.2.83-bleeding`](https://github.com/Armonte/fm2ktest/releases/tag/v0.2.83-bleeding)_
